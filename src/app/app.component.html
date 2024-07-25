@@ -1,7 +1,8 @@
+<tmb-header></tmb-header>
 <header class="header">
   <h1 class="title">Task Management Board</h1>
 </header>
-<main>
+<main *ngIf="isTaskPage">
   <div class="container">
     <button
       class="load-tasks-button"
