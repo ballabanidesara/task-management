@@ -4,22 +4,14 @@
 </header>
 <main *ngIf="isTaskPage">
   <div class="container">
-    <button
-      class="load-tasks-button"
-      mat-raised-button
-      color="accent"
-      (click)="addMockTasks()"
-    >
-      Load Mock Tasks
-    </button>
-    <button
-      class="clear-tasks-button"
-      mat-raised-button
-      color="accent"
-      (click)="clearTasks()"
-    >
-      Clear Tasks
-    </button>
+    <div class="button-container">
+      <button class="load-tasks-button" mat-raised-button color="accent" (click)="addMockTasks()">
+        <h5 class="title">Load Mock Tasks</h5>
+      </button>
+      <button class="clear-tasks-button" mat-raised-button color="accent" (click)="clearTasks()">
+        <h5 class="title">Clear Tasks</h5>
+      </button>
+    </div>
     <router-outlet></router-outlet>
   </div>
 </main>
