@@ -7,19 +7,22 @@ $icon-size: 24px;
   flex-direction: column;
   gap: 10px;
   background-color: $gunmetal;
-  padding: 10px;
+  padding: 20px; 
   border-radius: $border-radius-default;
   border: 2px solid $onyx;
+  max-width: 100%; 
+  width: 1200px;
+  margin: 0 auto; 
 
   &-actions {
     display: flex;
     align-items: center;
-    gap: 10px;
+    gap: 15px;
 
     .filters {
       display: flex;
       flex-direction: column;
-      gap: 10px;
+      gap: 15px;
       min-width: 0;
 
       @media screen and (min-width: $breakpoint-sm) {
@@ -34,7 +37,7 @@ $icon-size: 24px;
 
         button {
           position: absolute;
-          right: calc(-10px - $icon-size);
+          right: calc(-15px - $icon-size); 
         }
       }
     }
@@ -53,14 +56,14 @@ $icon-size: 24px;
   &-categories {
     display: flex;
     flex-direction: column;
-    gap: 10px;
+    gap: 20px; 
 
     @media screen and (min-width: $breakpoint-sm) {
       flex-direction: row;
 
       & > * {
         flex: 1;
-        width: 30%;
+        width: 20%;
       }
     }
   }

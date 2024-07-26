@@ -7,7 +7,9 @@
     <mat-icon class="in-progress" svgIcon="in-progress"></mat-icon>
     } @case (TaskStatus.Completed) {
     <mat-icon class="completed" svgIcon="check-circle"></mat-icon>
-    } }
+    }  @case (TaskStatus.Backlog) {
+      <mat-icon class="completed" svgIcon="close"></mat-icon>
+      }}
     <span class="task-count">{{ tasks().length }}</span>
   </div>
   <div tmbDragDropzone [dropCallback]="dropCallback" class="category-content">

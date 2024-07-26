@@ -89,6 +89,10 @@ export class TaskBoardComponent {
 
   prioritiesFilterActive = computed(() => this.prioritiesFilter().length < 3);
 
+  backlogTasks = computed(() =>
+    this.filteredTasks()?.filter((task) => task.status === TaskStatus.Backlog)
+  );
+
   toDoTasks = computed(() =>
     this.filteredTasks()?.filter((task) => task.status === TaskStatus.ToDo)
   );
@@ -100,6 +104,8 @@ export class TaskBoardComponent {
   completedTasks = computed(() =>
     this.filteredTasks().filter((task) => task.status === TaskStatus.Completed)
   );
+
+
 
   constructor(
     private destroyRef: DestroyRef,

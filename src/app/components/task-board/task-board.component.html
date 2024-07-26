@@ -70,6 +70,11 @@
   </div>
   <div class="board-categories">
     <tmb-task-category
+    [tasks]=" backlogTasks()"
+    [title]="'Backlog'"
+    [category]="TaskStatus.Backlog"
+  ></tmb-task-category>
+    <tmb-task-category
       [tasks]="toDoTasks()"
       [title]="'To Do'"
       [category]="TaskStatus.ToDo"
@@ -84,5 +89,7 @@
       [title]="'Completed'"
       [category]="TaskStatus.Completed"
     ></tmb-task-category>
+    
+   
   </div>
 </div>

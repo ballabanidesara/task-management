@@ -20,9 +20,10 @@ export interface TaskFormModel extends TaskBase {
 }
 
 export enum TaskStatus {
-  ToDo = 0,
-  InProgress = 1,
-  Completed = 2,
+  Backlog = 0,
+  ToDo = 1,
+  InProgress = 2,
+  Completed = 3
 }
 
 export enum TaskPriority {

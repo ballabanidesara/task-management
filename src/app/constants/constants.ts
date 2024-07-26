@@ -17,7 +17,7 @@ export const DATETIME_FORMAT: NgxMatDateFormats = {
 
 export const DIALOG_WIDTH = '640px';
 
-export const TASK_STATUS_LABELS = ['To Do', 'In Progress', 'Completed'];
+export const TASK_STATUS_LABELS = ['Backlog','To Do', 'In Progress', 'Completed'];
 
 export const TASK_PRIORITY_LABELS = ['High', 'Medium', 'Low'];
 
@@ -60,7 +60,17 @@ export function mockTasks() {
       title: 'Client meeting',
       assignee: 'Matt Doe',
       description: 'Have a meeting with the client',
-      status: TaskStatus.ToDo,
+      status: TaskStatus.Backlog,
+      priority: TaskPriority.High,
+      createdAt: moment().format(),
+      dueDate: moment().add(2, 'days').format(),
+    },
+    {
+      id: v4(),
+      title: 'Client meeting',
+      assignee: 'Matt Doe',
+      description: 'Have a meeting with the client',
+      status: TaskStatus.Completed,
       priority: TaskPriority.High,
       createdAt: moment().format(),
       dueDate: moment().add(2, 'days').format(),
