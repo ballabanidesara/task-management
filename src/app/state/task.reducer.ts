@@ -1,6 +1,6 @@
 import { createReducer, on } from '@ngrx/store';
 import { Task } from '../models/task.model';
-import { loadMockTasksSuccess, loadMockTasksFailure } from './task.actions';
+import { loadMockTasksSuccess, loadMockTasksFailure, clearTasks, clearTasksSuccess, clearTasksFailure } from './task.actions';
 
 
 // Define the initial state
@@ -17,5 +17,9 @@ export const initialState: TaskState = {
 export const taskReducer = createReducer(
   initialState,
   on(loadMockTasksSuccess, (state, { tasks }) => ({ ...state, tasks })),
-  on(loadMockTasksFailure, (state, { error }) => ({ ...state, error }))
+  on(loadMockTasksFailure, (state, { error }) => ({ ...state, error })),
+  on(clearTasksSuccess, (state) => ({ ...state, tasks: [] })),
+  on(clearTasksFailure, (state, { error }) => ({ ...state, error }))
 );
+
+

@@ -7,7 +7,7 @@ import { mockTasks } from './constants/constants';
 import { HeaderComponent } from './components/header/header.component';
 
 import { Store } from '@ngrx/store';
-import { loadMockTasks } from './state/task.actions';
+import { clearTasks, loadMockTasks } from './state/task.actions';
 import { StorageSchema } from './models/storage-schema.model';
 
 
@@ -46,7 +46,11 @@ export class AppComponent implements OnInit {
     this.store.dispatch(loadMockTasks());
   }
 
+  // clearTasks() {
+  //   this.storage.clear();
+  // }
+
   clearTasks() {
-    this.storage.clear();
+    this.store.dispatch(clearTasks());
   }
 }

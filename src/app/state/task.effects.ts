@@ -5,7 +5,7 @@ import { switchMap } from 'rxjs/operators';
 import { StorageService } from '../services/storage.service';
 import { Task, TaskStatus, TaskPriority } from '../models/task.model';
 import { StorageSchema } from '../models/storage-schema.model';
-import { loadMockTasks, loadMockTasksFailure, loadMockTasksSuccess } from './task.actions';
+import { clearTasks, clearTasksSuccess, loadMockTasks, loadMockTasksFailure, loadMockTasksSuccess } from './task.actions';
 
 @Injectable()
 export class TaskEffects {
@@ -23,6 +23,20 @@ export class TaskEffects {
           const mockedTasks = this.mockedTasks();
           this.storage.setItem('tasks', [...tasks, ...mockedTasks]);
           return of(loadMockTasksSuccess({ tasks: [...tasks, ...mockedTasks] }));
+        } catch (error) {
+          return of(loadMockTasksFailure({ error }));
+        }
+      })
+    )
+  );
+
+  clearTasks$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(clearTasks),
+      switchMap(() => {
+        try {
+          this.storage.clear();
+          return of(clearTasksSuccess());
         } catch (error) {
           return of(loadMockTasksFailure({ error }));
         }
@@ -76,3 +90,5 @@ export class TaskEffects {
     ];
   }
 }
+
+

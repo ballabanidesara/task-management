@@ -16,5 +16,8 @@ export const loadMockTasksFailure = createAction(
   props<{ error: any }>()
 );
 
+export const clearTasks = createAction('[Task] Clear Tasks');
+export const clearTasksSuccess = createAction('[Task] Clear Tasks Success');
+export const clearTasksFailure = createAction('[Task] Clear Tasks Failure', props<{ error: any }>());
 
 
