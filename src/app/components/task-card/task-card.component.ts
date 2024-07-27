@@ -19,6 +19,8 @@ import {
 import { A11yModule } from '@angular/cdk/a11y';
 import { MomentDatePipe } from 'src/app/pipes/moment-date.pipe';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { openEditTaskDialog, openTaskDetails, removeTask } from 'src/app/state/task.actions';
+import { Store } from '@ngrx/store';
 
 @Component({
   selector: 'tmb-task-card',
@@ -48,7 +50,8 @@ export class TaskCardComponent {
     private utilsService: UtilsService,
     private storage: StorageService<StorageSchema>,
     private dialog: MatDialog,
-    private snackBar: MatSnackBar
+    private snackBar: MatSnackBar,
+    private store: Store
   ) {
     this.utilsService.initSvgIcons([
       'three-dots-horizontal',
@@ -58,36 +61,56 @@ export class TaskCardComponent {
       'calendar-day-highlighted',
       'person',
     ]);
+
+
   }
+
+
+  // moreDetails() {
+  //   this.dialog.open(TaskDetailsDialogComponent, {
+  //     width: DIALOG_WIDTH,
+  //     data: { task: this.task() },
+  //   });
+  // }
 
   moreDetails() {
-    this.dialog.open(TaskDetailsDialogComponent, {
-      width: DIALOG_WIDTH,
-      data: { task: this.task() },
-    });
+    this.store.dispatch(openTaskDetails({ task: this.task() }));
   }
+
+
+  // edit() {
+  //   this.dialog.open(EditTaskDialogComponent, {
+  //     width: DIALOG_WIDTH,
+  //     data: { isEdit: true, task: this.task() },
+  //     disableClose: true,
+  //   });
+  // }
 
   edit() {
-    this.dialog.open(EditTaskDialogComponent, {
-      width: DIALOG_WIDTH,
-      data: { isEdit: true, task: this.task() },
-      disableClose: true,
-    });
+    const task: Task = this.task();
+    this.store.dispatch(openEditTaskDialog({ task }));
   }
+
+  // remove() {
+  //   const tasks = this.storage.getItem('tasks') || [];
+  //   const taskId = this.task().id;
+
+  //   // Remove the task
+  //   this.storage.setItem(
+  //     'tasks',
+  //     tasks.filter(task => task.id !== taskId)
+  //   );
+
+  //   // Show a notification
+  //   this.snackBar.open('Task was removed !', 'Close', {
+  //     duration: 2000, 
+  //   });
+  // }
 
   remove() {
-    const tasks = this.storage.getItem('tasks') || [];
-    const taskId = this.task().id;
-
-    // Remove the task
-    this.storage.setItem(
-      'tasks',
-      tasks.filter(task => task.id !== taskId)
-    );
-
-    // Show a notification
-    this.snackBar.open('Task was removed !', 'Close', {
-      duration: 2000, 
-    });
+    const task: Task = this.task();
+    this.store.dispatch(removeTask({ taskId: task.id }));
   }
+
+
 }

@@ -39,3 +39,32 @@ export const addTaskFailure = createAction(
   '[Task] Add Task Failure',
   props<{ error: any }>()
 );
+
+// Action to view the task
+export const openTaskDetails = createAction(
+  '[Task] Open Task Details',
+  props<{ task: Task }>()
+);
+
+// Action to open editTaskDialog
+export const openEditTaskDialog = createAction(
+  '[Task] Open Edit Task Dialog',
+  props<{ task: Task }>()
+);
+
+
+// Action to remove the task 
+export const removeTask = createAction(
+  '[Task] Remove Task',
+  props<{ taskId: string }>()
+);
+
+export const removeTaskSuccess = createAction(
+  '[Task] Remove Task Success',
+  props<{ taskId: string }>()
+);
+
+export const removeTaskFailure = createAction(
+  '[Task] Remove Task Failure',
+  props<{ error: any }>()
+);

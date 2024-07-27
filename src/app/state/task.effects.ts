@@ -15,10 +15,16 @@ import {
   loadMockTasksSuccess,
   openAddTaskDialog,
   addTaskSuccess,
-  addTaskFailure
+  addTaskFailure,
+  openTaskDetails,
+  openEditTaskDialog,
+  removeTask,
+  removeTaskFailure,
+  removeTaskSuccess
 } from './task.actions';
 import { Task, TaskPriority, TaskStatus } from '../models/task.model';
 import { EditTaskDialogComponent } from '../components/edit-task-dialog/edit-task-dialog.component';
+import { TaskDetailsDialogComponent } from '../components/task-details-dialog/task-details-dialog.component';
 
 @Injectable()
 export class TaskEffects {
@@ -95,6 +101,66 @@ export class TaskEffects {
       })
     )
   );
+
+  openTaskDetails$ = createEffect(
+    () =>
+      this.actions$.pipe(
+        ofType(openTaskDetails),
+        tap(({ task }) => {
+          this.dialog.open(TaskDetailsDialogComponent, {
+            width: '500px',
+            data: { task },
+          });
+        })
+      ),
+    { dispatch: false }
+  );
+
+
+  openEditTaskDialog$ = createEffect(
+    () =>
+      this.actions$.pipe(
+        ofType(openEditTaskDialog),
+        tap(({ task }) => {
+          this.dialog.open(EditTaskDialogComponent, {
+            width: '400px',
+            data: { isEdit: true, task },
+            disableClose: true,
+          });
+        })
+      ),
+    { dispatch: false }
+  );
+
+  removeTask$ = createEffect(() =>
+  this.actions$.pipe(
+    ofType(removeTask),
+    switchMap(({ taskId }) => {
+      try {
+        const tasks = this.storage.getItem('tasks') || [];
+        const updatedTasks = tasks.filter(task => task.id !== taskId);
+        this.storage.setItem('tasks', updatedTasks);
+        return of(removeTaskSuccess({ taskId }));
+      } catch (error) {
+        return of(removeTaskFailure({ error }));
+      }
+    })
+  )
+);
+
+removeTaskSuccess$ = createEffect(
+  () =>
+    this.actions$.pipe(
+      ofType(removeTaskSuccess),
+      tap(() => {
+        this.snackBar.open('Task was removed!', 'Close', {
+          duration: 2000,
+        });
+      })
+    ),
+  { dispatch: false }
+);
+
 
   private mockedTasks(): Task[] {
     return [

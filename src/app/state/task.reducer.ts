@@ -6,7 +6,10 @@ import {
   clearTasksSuccess,
   clearTasksFailure,
   addTaskSuccess,
-  addTaskFailure
+  addTaskFailure,
+  openEditTaskDialog,
+  removeTaskFailure,
+  removeTaskSuccess
 } from './task.actions';
 
 // Define the initial state
@@ -27,5 +30,12 @@ export const taskReducer = createReducer(
   on(clearTasksSuccess, (state) => ({ ...state, tasks: [] })),
   on(clearTasksFailure, (state, { error }) => ({ ...state, error })),
   on(addTaskSuccess, (state, { task }) => ({ ...state, tasks: [...state.tasks, task] })),
-  on(addTaskFailure, (state, { error }) => ({ ...state, error }))
+  on(addTaskFailure, (state, { error }) => ({ ...state, error })),
+  on(openEditTaskDialog, (state, { task }) => ({ ...state, selectedTask: task })),
+  on(removeTaskSuccess, (state, { taskId }) => ({
+    ...state,
+    tasks: state.tasks.filter(task => task.id !== taskId)
+  })),
+  on(removeTaskFailure, (state, { error }) => ({ ...state, error }))
+
 );
