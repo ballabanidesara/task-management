@@ -1,7 +1,9 @@
 <tmb-header></tmb-header>
 <header class="header">
-  <h1 class="title">Task Management Board</h1>
+  <h3 class="title">Welcome to your Task Management Board!</h3>
 </header>
+<tmb-task-status-chart [tasks]="(tasks$ | async) ?? []"></tmb-task-status-chart>
+
 <main *ngIf="isTaskPage">
   <div class="container">
     <div class="button-container">

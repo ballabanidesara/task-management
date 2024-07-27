@@ -8,21 +8,24 @@ import { Store } from '@ngrx/store';
 import { clearTasks, loadMockTasks } from './state/task.actions';
 import { StorageSchema } from './models/storage-schema.model';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
-
+import { TaskStatusChartComponent } from './components/task-status-chart/task-status-chart.component';
+import { Task, TaskPriority, TaskStatus } from './models/task.model';
+import { selectAllTasks } from './state/task.selectors';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'tmb-root',
   standalone: true,
-  imports: [CommonModule, RouterOutlet, HeaderComponent, MatSnackBarModule,],
+  imports: [CommonModule, RouterOutlet, HeaderComponent, MatSnackBarModule, TaskStatusChartComponent],
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss'],
 })
 export class AppComponent implements OnInit {
-  mockedTasks = mockTasks;
+  tasks$!: Observable<Task[]>;
   vh = window.innerHeight * 0.01;
   isTaskPage = false;
 
-  constructor(private storage: StorageService<StorageSchema>, private router: Router, private store: Store) { }
+  constructor(private store: Store, private router: Router) { }
 
   ngOnInit() {
     document.documentElement.style.setProperty('--vh', `${this.vh}px`);
@@ -34,8 +37,9 @@ export class AppComponent implements OnInit {
     this.router.events.subscribe(() => {
       this.isTaskPage = this.router.url === '/task';
     });
-  }
 
+    this.tasks$ = this.store.select(selectAllTasks);
+  }
   // addMockTasks() {
   //   const tasks = this.storage.getItem('tasks') || [];
   //   this.storage.setItem('tasks', [...tasks, ...this.mockedTasks()]);
