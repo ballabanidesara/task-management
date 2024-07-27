@@ -2,19 +2,18 @@ import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Router, RouterOutlet } from '@angular/router';
 import { StorageService } from './services/storage.service';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations'; // Import BrowserAnimationsModule
 import { mockTasks } from './constants/constants';
 import { HeaderComponent } from './components/header/header.component';
-
 import { Store } from '@ngrx/store';
 import { clearTasks, loadMockTasks } from './state/task.actions';
 import { StorageSchema } from './models/storage-schema.model';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
 
 
 @Component({
   selector: 'tmb-root',
   standalone: true,
-  imports: [CommonModule, RouterOutlet, HeaderComponent],
+  imports: [CommonModule, RouterOutlet, HeaderComponent, MatSnackBarModule,],
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss'],
 })

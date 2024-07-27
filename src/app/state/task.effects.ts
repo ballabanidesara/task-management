@@ -1,18 +1,20 @@
 import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { of } from 'rxjs';
-import { switchMap } from 'rxjs/operators';
+import { catchError, switchMap, tap } from 'rxjs/operators';
+import { MatSnackBar } from '@angular/material/snack-bar'; 
 import { StorageService } from '../services/storage.service';
-import { Task, TaskStatus, TaskPriority } from '../models/task.model';
 import { StorageSchema } from '../models/storage-schema.model';
-import { clearTasks, clearTasksSuccess, loadMockTasks, loadMockTasksFailure, loadMockTasksSuccess } from './task.actions';
+import { clearTasks, clearTasksSuccess, clearTasksFailure, loadMockTasks, loadMockTasksFailure, loadMockTasksSuccess } from './task.actions';
+import { Task, TaskPriority, TaskStatus } from '../models/task.model';
 
 @Injectable()
 export class TaskEffects {
   constructor(
     private actions$: Actions,
-    private storage: StorageService<StorageSchema>
-  ) { }
+    private storage: StorageService<StorageSchema>,
+    private snackBar: MatSnackBar
+  ) {}
 
   loadMockTasks$ = createEffect(() =>
     this.actions$.pipe(
@@ -38,10 +40,23 @@ export class TaskEffects {
           this.storage.clear();
           return of(clearTasksSuccess());
         } catch (error) {
-          return of(loadMockTasksFailure({ error }));
+          return of(clearTasksFailure({ error }));
         }
       })
     )
+  );
+
+  clearTasksSuccess$ = createEffect(
+    () =>
+      this.actions$.pipe(
+        ofType(clearTasksSuccess),
+        tap(() => {
+          this.snackBar.open('Tasks cleared successfully', 'Close', {
+            duration: 500,
+          });
+        })
+      ),
+    { dispatch: false }
   );
 
   private mockedTasks(): Task[] {
@@ -86,9 +101,6 @@ export class TaskEffects {
         createdAt: '2024-07-01',
         dueDate: '2024-03-15'
       },
-
     ];
   }
 }
-
-
