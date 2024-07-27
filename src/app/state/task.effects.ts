@@ -164,46 +164,46 @@ removeTaskSuccess$ = createEffect(
 
   private mockedTasks(): Task[] {
     return [
-      {
-        id: '1',
-        title: 'Mock Task 1',
-        status: TaskStatus.Backlog,
-        priority: TaskPriority.High,
-        assignee: 'Ana Lika',
-        description: 'This is a mock task description',
-        createdAt: null,
-        dueDate: '2024-08-01'
-      },
-      {
-        id: '2',
-        title: 'Mock Task 2',
-        status: TaskStatus.ToDo,
-        priority: TaskPriority.Medium,
-        assignee: 'Lea Osmani',
-        description: 'This is another mock task description',
-        createdAt: '2024-07-01',
-        dueDate: '2024-07-15'
-      },
-      {
-        id: '3',
-        title: 'Mock Task 3',
-        status: TaskStatus.InProgress,
-        priority: TaskPriority.High,
-        assignee: 'Sara Ballabani',
-        description: 'This is a mock task description',
-        createdAt: null,
-        dueDate: '2024-05-01'
-      },
-      {
-        id: '4',
-        title: 'Mock Task 4',
-        status: TaskStatus.Completed,
-        priority: TaskPriority.Medium,
-        assignee: 'Ana Osmani',
-        description: 'This is another mock task description',
-        createdAt: '2024-07-01',
-        dueDate: '2024-03-15'
-      },
+      // {
+      //   id: '1',
+      //   title: 'Mock Task 1',
+      //   status: TaskStatus.Backlog,
+      //   priority: TaskPriority.High,
+      //   assignee: 'Ana Lika',
+      //   description: 'This is a mock task description',
+      //   createdAt: null,
+      //   dueDate: '2024-08-01'
+      // },
+      // {
+      //   id: '2',
+      //   title: 'Mock Task 2',
+      //   status: TaskStatus.ToDo,
+      //   priority: TaskPriority.Medium,
+      //   assignee: 'Lea Osmani',
+      //   description: 'This is another mock task description',
+      //   createdAt: '2024-07-01',
+      //   dueDate: '2024-07-15'
+      // },
+      // {
+      //   id: '3',
+      //   title: 'Mock Task 3',
+      //   status: TaskStatus.InProgress,
+      //   priority: TaskPriority.High,
+      //   assignee: 'Sara Ballabani',
+      //   description: 'This is a mock task description',
+      //   createdAt: null,
+      //   dueDate: '2024-05-01'
+      // },
+      // {
+      //   id: '4',
+      //   title: 'Mock Task 4',
+      //   status: TaskStatus.Completed,
+      //   priority: TaskPriority.Medium,
+      //   assignee: 'Ana Osmani',
+      //   description: 'This is another mock task description',
+      //   createdAt: '2024-07-01',
+      //   dueDate: '2024-03-15'
+      // },
     ];
   }
 }
