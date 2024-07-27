@@ -18,6 +18,7 @@ import {
 } from 'src/app/constants/constants';
 import { A11yModule } from '@angular/cdk/a11y';
 import { MomentDatePipe } from 'src/app/pipes/moment-date.pipe';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'tmb-task-card',
@@ -46,7 +47,8 @@ export class TaskCardComponent {
   constructor(
     private utilsService: UtilsService,
     private storage: StorageService<StorageSchema>,
-    private dialog: MatDialog
+    private dialog: MatDialog,
+    private snackBar: MatSnackBar
   ) {
     this.utilsService.initSvgIcons([
       'three-dots-horizontal',
@@ -75,9 +77,17 @@ export class TaskCardComponent {
 
   remove() {
     const tasks = this.storage.getItem('tasks') || [];
+    const taskId = this.task().id;
+
+    // Remove the task
     this.storage.setItem(
       'tasks',
-      tasks?.filter((task) => task.id !== this.task().id)
+      tasks.filter(task => task.id !== taskId)
     );
+
+    // Show a notification
+    this.snackBar.open('Task was removed !', 'Close', {
+      duration: 2000, 
+    });
   }
 }

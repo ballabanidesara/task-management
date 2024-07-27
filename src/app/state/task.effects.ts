@@ -64,7 +64,7 @@ export class TaskEffects {
       this.actions$.pipe(
         ofType(clearTasksSuccess),
         tap(() => {
-          this.snackBar.open('Tasks cleared successfully', 'Close', {
+          this.snackBar.open('Tasks cleared successfully !', 'Close', {
             duration: 500,
           });
         })
