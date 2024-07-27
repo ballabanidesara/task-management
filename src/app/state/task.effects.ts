@@ -83,7 +83,7 @@ export class TaskEffects {
       ofType(openAddTaskDialog),
       switchMap(() => {
         const dialogRef = this.dialog.open(EditTaskDialogComponent, {
-          width: '400px',
+          width: '500px',
           data: { isEdit: false },
           disableClose: true,
         });
@@ -123,7 +123,7 @@ export class TaskEffects {
         ofType(openEditTaskDialog),
         tap(({ task }) => {
           this.dialog.open(EditTaskDialogComponent, {
-            width: '400px',
+            width: '500px',
             data: { isEdit: true, task },
             disableClose: true,
           });

@@ -68,7 +68,7 @@ describe('EditTaskDialogComponent', () => {
       title: 'Test Task',
       status: TaskStatus.InProgress,
       priority: TaskPriority.Medium,
-      assignee: 'John Doe',
+      assignee: 'Ana Lika',
       description: 'Test description',
       dueDate: dueDate.format(),
     } as Task; // Create a mock task for testing
@@ -77,7 +77,7 @@ describe('EditTaskDialogComponent', () => {
       title: 'Test Task',
       status: TaskStatus.InProgress,
       priority: TaskPriority.Medium,
-      assignee: 'John Doe',
+      assignee: 'Lea Osmani',
       description: 'Test description',
       createdAt: createdAt,
       dueDate: dueDate,
