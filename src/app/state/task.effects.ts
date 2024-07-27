@@ -1,20 +1,33 @@
 import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { of } from 'rxjs';
-import { catchError, switchMap, tap } from 'rxjs/operators';
-import { MatSnackBar } from '@angular/material/snack-bar'; 
+import { catchError, switchMap, tap, map } from 'rxjs/operators';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { MatDialog } from '@angular/material/dialog';
 import { StorageService } from '../services/storage.service';
 import { StorageSchema } from '../models/storage-schema.model';
-import { clearTasks, clearTasksSuccess, clearTasksFailure, loadMockTasks, loadMockTasksFailure, loadMockTasksSuccess } from './task.actions';
+import {
+  clearTasks,
+  clearTasksSuccess,
+  clearTasksFailure,
+  loadMockTasks,
+  loadMockTasksFailure,
+  loadMockTasksSuccess,
+  openAddTaskDialog,
+  addTaskSuccess,
+  addTaskFailure
+} from './task.actions';
 import { Task, TaskPriority, TaskStatus } from '../models/task.model';
+import { EditTaskDialogComponent } from '../components/edit-task-dialog/edit-task-dialog.component';
 
 @Injectable()
 export class TaskEffects {
   constructor(
     private actions$: Actions,
     private storage: StorageService<StorageSchema>,
-    private snackBar: MatSnackBar
-  ) {}
+    private snackBar: MatSnackBar,
+    private dialog: MatDialog
+  ) { }
 
   loadMockTasks$ = createEffect(() =>
     this.actions$.pipe(
@@ -57,6 +70,30 @@ export class TaskEffects {
         })
       ),
     { dispatch: false }
+  );
+
+  openAddTaskDialog$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(openAddTaskDialog),
+      switchMap(() => {
+        const dialogRef = this.dialog.open(EditTaskDialogComponent, {
+          width: '400px',
+          data: { isEdit: false },
+          disableClose: true,
+        });
+
+        return dialogRef.afterClosed().pipe(
+          map((result) => {
+            if (result) {
+              return addTaskSuccess({ task: result });
+            } else {
+              throw new Error('Task addition canceled');
+            }
+          }),
+          catchError((error) => of(addTaskFailure({ error })))
+        );
+      })
+    )
   );
 
   private mockedTasks(): Task[] {

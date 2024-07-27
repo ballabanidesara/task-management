@@ -27,6 +27,8 @@ import { FormControl, ReactiveFormsModule } from '@angular/forms';
 import { map } from 'rxjs';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatSelectModule } from '@angular/material/select';
+import { openAddTaskDialog } from 'src/app/state/task.actions';
+import { Store } from '@ngrx/store';
 
 @Component({
   selector: 'tmb-task-board',
@@ -111,7 +113,8 @@ export class TaskBoardComponent {
     private destroyRef: DestroyRef,
     private storage: StorageService<StorageSchema>,
     private utils: UtilsService,
-    private dialog: MatDialog
+    private dialog: MatDialog,
+    private store: Store
   ) {
     this.utils.initSvgIcons(['add', 'close', 'reset']);
   }
@@ -126,12 +129,16 @@ export class TaskBoardComponent {
     if (prioritiesFilter) this.prioritiesFilterControl.reset([1, 2, 3]);
   }
 
+  // addTask() {
+  //   this.dialog.open(EditTaskDialogComponent, {
+  //     width: DIALOG_WIDTH,
+  //     data: { isEdit: false },
+  //     disableClose: true,
+  //   });
+  // }
+
   addTask() {
-    this.dialog.open(EditTaskDialogComponent, {
-      width: DIALOG_WIDTH,
-      data: { isEdit: false },
-      disableClose: true,
-    });
+    this.store.dispatch(openAddTaskDialog());
   }
 
   private computeFilteredTasks() {
