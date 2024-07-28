@@ -29,7 +29,7 @@ import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatSelectModule } from '@angular/material/select';
 import { openAddTaskDialog } from 'src/app/state/task.actions';
 import { Store } from '@ngrx/store';
-
+import { TranslateModule } from '@ngx-translate/core';
 @Component({
   selector: 'tmb-task-board',
   standalone: true,
@@ -49,6 +49,7 @@ import { Store } from '@ngrx/store';
     MatDialogModule,
     EditTaskDialogComponent,
     A11yModule,
+    TranslateModule
   ],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

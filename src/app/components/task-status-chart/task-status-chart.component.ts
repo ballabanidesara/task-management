@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, Input, OnInit, AfterViewInit, OnDestroy } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Input, OnInit, AfterViewInit, OnDestroy, ChangeDetectorRef } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Store } from '@ngrx/store';
 import { Task } from 'src/app/models/task.model';
@@ -6,6 +6,7 @@ import { selectBacklogTasks, selectToDoTasks, selectInProgressTasks, selectCompl
 import { Observable, Subscription } from 'rxjs';
 import { Chart, DoughnutController, CategoryScale, ArcElement, Tooltip, Legend, ChartConfiguration, ChartData } from 'chart.js';
 import { map } from 'rxjs/operators';
+import { TranslateService, TranslateModule } from '@ngx-translate/core';
 
 @Component({
   selector: 'tmb-task-status-chart',
@@ -13,7 +14,7 @@ import { map } from 'rxjs/operators';
   templateUrl: './task-status-chart.component.html',
   styleUrls: ['./task-status-chart.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
-  imports: [CommonModule]
+  imports: [CommonModule, TranslateModule]
 })
 export class TaskStatusChartComponent implements OnInit, AfterViewInit, OnDestroy {
   @Input() tasks: Task[] = [];
@@ -27,7 +28,7 @@ export class TaskStatusChartComponent implements OnInit, AfterViewInit, OnDestro
   private chart!: Chart<'doughnut', number[], string>;
   private subscriptions: Subscription = new Subscription();
 
-  constructor(private store: Store) {}
+  constructor(private store: Store, private translate: TranslateService, private cdr: ChangeDetectorRef) {}
 
   ngOnInit() {
     this.totalTasks$ = this.store.select(selectAllTasks).pipe(map(tasks => tasks.length));
@@ -38,7 +39,7 @@ export class TaskStatusChartComponent implements OnInit, AfterViewInit, OnDestro
   }
 
   ngAfterViewInit() {
-    this.renderChart();
+    this.loadTranslationsAndRenderChart();
     this.subscribeToData();
   }
 
@@ -46,47 +47,65 @@ export class TaskStatusChartComponent implements OnInit, AfterViewInit, OnDestro
     this.subscriptions.unsubscribe();
   }
 
-  renderChart() {
-    // Register chart components
-    Chart.register(DoughnutController, CategoryScale, ArcElement, Tooltip, Legend);
+  loadTranslationsAndRenderChart() {
+    this.translate.get(['backlog', 'todo', 'inprogress', 'completed']).subscribe(translations => {
+      // Register chart components
+      Chart.register(DoughnutController, CategoryScale, ArcElement, Tooltip, Legend);
 
-    const chartData: ChartData<'doughnut', number[], string> = {
-      labels: ['Backlog', 'To Do', 'In Progress', 'Completed'],
-      datasets: [{
-        data: [0, 0, 0, 0], // Initial empty data
-        backgroundColor: ['#FF6384', '#36A2EB', '#FFCE56', '#4CAF50'],
-      }]
-    };
+      const chartData: ChartData<'doughnut', number[], string> = {
+        labels: [
+          translations['backlog'],
+          translations['todo'],
+          translations['inprogress'],
+          translations['completed']
+        ],
+        datasets: [{
+          data: [0, 0, 0, 0], // Initial empty data
+          backgroundColor: ['#FF6384', '#36A2EB', '#FFCE56', '#4CAF50'],
+        }]
+      };
 
-    const chartConfig: ChartConfiguration<'doughnut', number[], string> = {
-      type: 'doughnut',
-      data: chartData,
-      options: {
-        responsive: true,
-        maintainAspectRatio: false,
-      }
-    };
+      const chartConfig: ChartConfiguration<'doughnut', number[], string> = {
+        type: 'doughnut',
+        data: chartData,
+        options: {
+          responsive: true,
+          maintainAspectRatio: false,
+        }
+      };
 
-    // Create chart with initial empty data
-    this.chart = new Chart('taskStatusChart', chartConfig);
+      // Create chart with initial data and translated labels
+      this.chart = new Chart('taskStatusChart', chartConfig);
+      
+      // Ensure change detection to reflect updates
+      this.cdr.detectChanges();
+    });
   }
 
   subscribeToData() {
     this.subscriptions.add(this.backlogTasks$.subscribe(data => {
-      this.chart.data.datasets[0].data[0] = data;
-      this.chart.update();
+      if (this.chart) {
+        this.chart.data.datasets[0].data[0] = data;
+        this.chart.update();
+      }
     }));
     this.subscriptions.add(this.todoTasks$.subscribe(data => {
-      this.chart.data.datasets[0].data[1] = data;
-      this.chart.update();
+      if (this.chart) {
+        this.chart.data.datasets[0].data[1] = data;
+        this.chart.update();
+      }
     }));
     this.subscriptions.add(this.inProgressTasks$.subscribe(data => {
-      this.chart.data.datasets[0].data[2] = data;
-      this.chart.update();
+      if (this.chart) {
+        this.chart.data.datasets[0].data[2] = data;
+        this.chart.update();
+      }
     }));
     this.subscriptions.add(this.completedTasks$.subscribe(data => {
-      this.chart.data.datasets[0].data[3] = data;
-      this.chart.update();
+      if (this.chart) {
+        this.chart.data.datasets[0].data[3] = data;
+        this.chart.update();
+      }
     }));
   }
 }

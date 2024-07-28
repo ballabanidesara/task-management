@@ -1,0 +1,13 @@
+{
+  "welcome": "Willkommen bei Ihrem Aufgabenmanagement-Board!",
+  "backlog": "Backlog",
+  "todo": "Zu Erledigen",
+  "inprogress": "In Bearbeitung",
+  "completed": "Abgeschlossen",
+  "overview": "Aufgabenübersicht",
+  "tasktracker": "AufgabenTracker",
+  "login": "Anmelden",
+  "signup": "Registrieren",
+  "updatetask": "AufgabenübersichtAktualisieren",
+  "cleartask": "Aufgaben löschen"
+}

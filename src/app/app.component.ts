@@ -12,11 +12,12 @@ import { TaskStatusChartComponent } from './components/task-status-chart/task-st
 import { Task, TaskPriority, TaskStatus } from './models/task.model';
 import { selectAllTasks } from './state/task.selectors';
 import { Observable } from 'rxjs';
+import { TranslateModule } from '@ngx-translate/core';
 
 @Component({
   selector: 'tmb-root',
   standalone: true,
-  imports: [CommonModule, RouterOutlet, HeaderComponent, MatSnackBarModule, TaskStatusChartComponent],
+  imports: [CommonModule, RouterOutlet, HeaderComponent, MatSnackBarModule, TaskStatusChartComponent,  TranslateModule],
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss'],
 })

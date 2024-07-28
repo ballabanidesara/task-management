@@ -59,6 +59,7 @@
           }
           .buttons {
             display: flex;
+            padding-left: 30px;
             .button {
               margin-left: 2rem;
               background-color: #121420;
@@ -80,4 +81,6 @@
   span.task-tracker{
     font-size: 18px;
   }
+
+  
 }

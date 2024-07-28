@@ -177,6 +177,7 @@ $tmb-theme: map.merge($tmb-theme, foreground, $foreground-palette);
 
 span.mdc-button__label {
   font-size: inherit;
+  color: black !important;
 }
 
 .mat-component-density-s {

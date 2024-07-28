@@ -1,0 +1,13 @@
+{
+  "welcome": "Welcome to your Task Management Board!",
+  "backlog": "Backlog",
+  "todo": "To Do",
+  "inprogress": "In Progress",
+  "completed": "Completed",
+  "overview": "Task Overview",
+  "tasktracker": "TaskTracker",
+  "login": "Log in",
+  "signup": "Sign up",
+  "updatetask": "Update Task Overview",
+  "cleartask": "Clear Tasks"
+}

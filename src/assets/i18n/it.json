@@ -1,0 +1,13 @@
+{
+  "welcome": "Benvenuti alla bacheca di gestione delle attività!",
+  "backlog": "Arretrati",
+  "todo": "Da fare",
+  "inprogress": "In corso",
+  "completed": "Completato",
+  "overview": "Panoramica delle Attività",
+  "tasktracker": "TracciatoreAttività",
+  "login": "Accedi",
+  "signup": "Registrati",
+  "updatetask": "Aggiorna Panoramica Attività",
+  "cleartask": "Pulisci Attività"
+}

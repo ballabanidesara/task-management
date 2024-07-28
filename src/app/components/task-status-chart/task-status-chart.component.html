@@ -1,22 +1,22 @@
 <section class="stats-section">
     <div class="stats-card">
-        <h3>Backlog</h3>
+        <h3>{{ 'backlog' | translate }}</h3>
         <p>{{ backlogTasks$ | async }}</p>
     </div>
     <div class="stats-card">
-        <h3>To Do</h3>
+        <h3>{{ 'todo' | translate }}</h3>
         <p>{{ todoTasks$ | async }}</p>
     </div>
     <div class="stats-card">
-        <h3>In Progress</h3>
+        <h3>{{ 'inprogress' | translate }}</h3>
         <p>{{ inProgressTasks$ | async }}</p>
     </div>
     <div class="stats-card">
-        <h3>Completed</h3>
+        <h3>{{ 'completed' | translate }}</h3>
         <p>{{ completedTasks$ | async }}</p>
     </div>
     <div class="chart-container">
-        <h3>Tasks Overview</h3>
+        <h3>{{ 'overview' | translate }}</h3>
         <canvas id="taskStatusChart"></canvas>
     </div>
 </section>

@@ -3,14 +3,25 @@
     <div class="navbar-menu">
       <div class="navbar-start">
         <a routerLink="/" class="navbar-item">
-          <span  class="task-tracker">TaskTracker</span>
+          <span class="task-tracker">{{ 'tasktracker' | translate }}</span>
         </a>
       </div>
       <div class="navbar-end">
         <div class="navbar-item">
+          <div class="language-dropdown-profile">
+            <button mat-button [matMenuTriggerFor]="languageMenu">
+              {{ currentLanguage }}
+            </button>
+            <mat-menu #languageMenu="matMenu">
+              <button mat-menu-item (click)="switchLanguage('en')" style="color: black;">ENGLISH</button>
+              <button mat-menu-item (click)="switchLanguage('it')" style="color: black;">ITALIAN</button>
+              <button mat-menu-item (click)="switchLanguage('de')" style="color: black;">GERMAN</button>
+            </mat-menu>
+          </div>
+
           <div class="buttons">
-            <button routerLink="/login" class="button is-light">Log in</button>
-            <button routerLink="/signup" class="button is-primary">Sign up</button>
+            <button routerLink="/login" class="button is-light">{{ 'login' | translate }}</button>
+            <button routerLink="/signup" class="button is-primary">{{ 'signup' | translate }}</button>
           </div>
         </div>
       </div>

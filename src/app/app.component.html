@@ -1,6 +1,6 @@
 <tmb-header></tmb-header>
 <header class="header">
-  <h3 class="title">Welcome to your Task Management Board!</h3>
+  <h3 class="title">  {{ 'welcome' | translate }}</h3>
 </header>
 <tmb-task-status-chart [tasks]="(tasks$ | async) ?? []" *ngIf="isHomePage"></tmb-task-status-chart>
 
@@ -8,10 +8,10 @@
   <div class="container">
     <div *ngIf="isHomePage" class="button-container">
       <button class="load-tasks-button" mat-raised-button color="accent" (click)="addMockTasks()">
-        <h5 class="title">Update Task Overview</h5>
+        <h5 class="title">{{ 'updatetask' | translate }}</h5>
       </button>
       <button class="clear-tasks-button" mat-raised-button color="accent" (click)="clearTasks()">
-        <h5 class="title">Clear Tasks</h5>
+        <h5 class="title">{{ 'cleartask' | translate }}</h5>
       </button>
     </div>
     <router-outlet></router-outlet>

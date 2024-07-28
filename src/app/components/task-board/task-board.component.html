@@ -71,22 +71,22 @@
   <div class="board-categories">
     <tmb-task-category
     [tasks]=" backlogTasks()"
-    [title]="'Backlog'"
+    [title]="'backlog' | translate"
     [category]="TaskStatus.Backlog"
   ></tmb-task-category>
     <tmb-task-category
       [tasks]="toDoTasks()"
-      [title]="'To Do'"
+      [title]="'todo' | translate"
       [category]="TaskStatus.ToDo"
     ></tmb-task-category>
     <tmb-task-category
       [tasks]="inProgressTasks()"
-      [title]="'In Progress'"
+      [title]="'inprogress' | translate"
       [category]="TaskStatus.InProgress"
     ></tmb-task-category>
     <tmb-task-category
       [tasks]="completedTasks()"
-      [title]="'Completed'"
+      [title]="'completed' | translate"
       [category]="TaskStatus.Completed"
     ></tmb-task-category>
     
