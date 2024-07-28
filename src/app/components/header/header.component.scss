@@ -56,14 +56,6 @@
                 margin-left: -2rem;
               }
             }
-
-            .task-tracker {
-              font-family: "Gilroy", sans-serif;
-              font-weight: 300; // Light weight
-              font-size: 1.5rem;
-              color: #2c3e50;
-              margin-left: 0.5rem;
-            }
           }
           .buttons {
             display: flex;
@@ -83,5 +75,9 @@
         }
       }
     }
+  }
+
+  span.task-tracker{
+    font-size: 18px;
   }
 }
