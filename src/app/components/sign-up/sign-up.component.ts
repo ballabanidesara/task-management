@@ -1,8 +1,9 @@
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { AuthService } from '../../services/auth.service';
 import { Router } from '@angular/router';
-import { FormsModule, NgForm } from '@angular/forms';
+import { NgForm } from '@angular/forms';
 import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'tmb-sign-up',
@@ -16,7 +17,8 @@ import { CommonModule } from '@angular/common';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class SignupComponent implements OnInit {
-  user = { username: '', email: '', password: '', role: 'user' };
+  
+  user = { username: '', email: '', password: '' };
   errorMessage: string | null = null;
 
   constructor(private authService: AuthService, private router: Router) {}
@@ -26,10 +28,14 @@ export class SignupComponent implements OnInit {
   signUp(form: NgForm) {
     if (form.valid) {
       this.authService.signup(this.user).subscribe({
-        next: (response) => {
-          console.log('Signup successful, token:', response.token);
-          localStorage.setItem('token', response.token);
-          this.router.navigate(['/']);
+        next: (response: any) => {
+          if (response.result) {
+            alert('Signup Successful');
+            localStorage.setItem('token', response.data.token);
+            this.router.navigate(['/']);
+          } else {
+            this.errorMessage = response.message;
+          }
         },
         error: (error) => {
           this.errorMessage = 'Signup failed. Please try again!';

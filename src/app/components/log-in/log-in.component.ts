@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { AuthService } from '../../services/auth.service';
 import { Router } from '@angular/router';
 import { FormsModule, NgForm } from '@angular/forms';
@@ -15,25 +15,30 @@ import { CommonModule } from '@angular/common';
   styleUrls: ['./log-in.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class LoginComponent implements OnInit {
-  user = { email: '', password: '' };
+export class LoginComponent {
+  loginObj = {
+    email: '',
+    password: ''
+  };
   errorMessage: string | null = null;
 
-  constructor(private authService: AuthService, private router: Router) {}
+  constructor(private authService: AuthService, private router: Router) { }
 
-  ngOnInit(): void {}
-
-  login(form: NgForm) {
+  onLogin(form: NgForm) {
     if (form.valid) {
-      this.authService.login(this.user).subscribe({
-        next: (response) => {
-          console.log('Login successful, token:', response.token);
-          localStorage.setItem('token', response.token);
-          this.router.navigate(['/dashboard']);
+      this.authService.login(this.loginObj).subscribe({
+        next: (res: any) => {
+          if (res.result) {
+            alert('Login Success');
+            localStorage.setItem('token', res.data.token);
+            this.router.navigateByUrl('/');
+          } else {
+            this.errorMessage = res.message;
+          }
         },
-        error: (error) => {
+        error: (err) => {
           this.errorMessage = 'Login failed. Please try again!';
-          console.error('Login failed:', error);
+          console.error('Login error:', err);
         }
       });
     }

@@ -4,11 +4,11 @@
     src="//ssl.gstatic.com/accounts/ui/avatar_2x.png"
     class="profile-img-card"
   />
-  <form #loginForm="ngForm" (ngSubmit)="login(loginForm)">
+  <form #loginForm="ngForm" (ngSubmit)="onLogin(loginForm)">
     <div class="field">
       <label class="label">Email</label>
       <div class="control has-icons-left">
-        <input class="input" type="email" [(ngModel)]="user.email" name="email" required email #email="ngModel">
+        <input class="input" type="email" [(ngModel)]="loginObj.email" name="email" required email #email="ngModel">
         <span class="icon is-small is-left">
           <i class="fas fa-envelope"></i>
         </span>
@@ -21,7 +21,7 @@
     <div class="field">
       <label class="label">Password</label>
       <div class="control has-icons-left">
-        <input class="input" type="password" [(ngModel)]="user.password" name="password" required minlength="6" #password="ngModel">
+        <input class="input" type="password" [(ngModel)]="loginObj.password" name="password" required minlength="6" #password="ngModel">
         <span class="icon is-small is-left">
           <i class="fas fa-lock"></i>
         </span>
