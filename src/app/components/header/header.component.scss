@@ -33,6 +33,7 @@
           color: #121420;
           cursor: pointer;
           text-decoration: none;
+          font-weight: bold;
         }
       }
 
@@ -55,12 +56,28 @@
                 margin-left: -2rem;
               }
             }
+
+            .task-tracker {
+              font-family: "Gilroy", sans-serif;
+              font-weight: 300; // Light weight
+              font-size: 1.5rem;
+              color: #2c3e50;
+              margin-left: 0.5rem;
+            }
           }
           .buttons {
             display: flex;
             .button {
-              margin-left: 0.5rem;
-              color: #121420;
+              margin-left: 2rem;
+              background-color: #121420;
+              padding: 10px;
+              border-radius: 5px;
+              font-size: 15px;
+
+              &:hover {
+                background-color: #989a9e;
+                color: #fff;
+              }
             }
           }
         }

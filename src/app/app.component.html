@@ -2,11 +2,11 @@
 <header class="header">
   <h3 class="title">Welcome to your Task Management Board!</h3>
 </header>
-<tmb-task-status-chart [tasks]="(tasks$ | async) ?? []"></tmb-task-status-chart>
+<tmb-task-status-chart [tasks]="(tasks$ | async) ?? []" *ngIf="isHomePage"></tmb-task-status-chart>
 
-<main *ngIf="isTaskPage">
+<main>
   <div class="container">
-    <div class="button-container">
+    <div *ngIf="isHomePage" class="button-container">
       <button class="load-tasks-button" mat-raised-button color="accent" (click)="addMockTasks()">
         <h5 class="title">Update Task Overview</h5>
       </button>

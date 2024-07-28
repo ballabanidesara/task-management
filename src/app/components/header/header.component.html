@@ -1,35 +1,19 @@
 <header class="header">
-    <nav class="navbar">
-     
-  
-      <div class="navbar-menu">
-        <div class="navbar-start">
-          <a routerLink="/dashboard" class="navbar-item">Dashboard</a>
-          <a routerLink="/task" class="navbar-item">Tasks</a>
-        </div>
-  
-  
-        <div class="navbar-end">
-          <div class="navbar-item">
-            <div class="field">
-              <p class="control has-icons-left">
-               
-                <span class="icon is-left">
-                  <i class="fas fa-search"></i>
-                </span>
-              </p>
-            </div>
-          </div>
-  
-          <div class="navbar-item">
-            <div class="buttons">
-              <a class="button is-light">
-                Log out
-              </a>
-            </div>
+  <nav class="navbar">
+    <div class="navbar-menu">
+      <div class="navbar-start">
+        <a routerLink="/" class="navbar-item">
+          <span  class="task-tracker">TaskTracker</span>
+        </a>
+      </div>
+      <div class="navbar-end">
+        <div class="navbar-item">
+          <div class="buttons">
+            <button routerLink="/login" class="button is-light">Log in</button>
+            <button routerLink="/signup" class="button is-primary">Sign up</button>
           </div>
         </div>
       </div>
-    </nav>
-  </header>
-  
+    </div>
+  </nav>
+</header>

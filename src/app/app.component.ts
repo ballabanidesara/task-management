@@ -23,7 +23,7 @@ import { Observable } from 'rxjs';
 export class AppComponent implements OnInit {
   tasks$!: Observable<Task[]>;
   vh = window.innerHeight * 0.01;
-  isTaskPage = false;
+  isHomePage = false;
 
   constructor(private store: Store, private router: Router) { }
 
@@ -35,7 +35,7 @@ export class AppComponent implements OnInit {
     });
 
     this.router.events.subscribe(() => {
-      this.isTaskPage = this.router.url === '/task';
+      this.isHomePage = this.router.url === '/';
     });
 
     this.tasks$ = this.store.select(selectAllTasks);
