@@ -1,8 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Router, RouterOutlet } from '@angular/router';
-import { StorageService } from './services/storage.service';
-import { mockTasks } from './constants/constants';
 import { HeaderComponent } from './components/header/header.component';
 import { Store } from '@ngrx/store';
 import { clearTasks, loadMockTasks } from './state/task.actions';

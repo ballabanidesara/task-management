@@ -29,42 +29,21 @@ export const clearTasksFailure = createAction('[Task] Clear Tasks Failure', prop
 export const openAddTaskDialog = createAction('[Task] Open Add Task Dialog');
 
 // Action for successful addition of a task
-export const addTaskSuccess = createAction(
-  '[Task] Add Task Success',
-  props<{ task: Task }>()
-);
+export const addTaskSuccess = createAction('[Task] Add Task Success', props<{ task: Task }>());
 
 // Action for failed addition of a task
-export const addTaskFailure = createAction(
-  '[Task] Add Task Failure',
-  props<{ error: any }>()
-);
+export const addTaskFailure = createAction('[Task] Add Task Failure', props<{ error: any }>());
 
 // Action to view the task
-export const openTaskDetails = createAction(
-  '[Task] Open Task Details',
-  props<{ task: Task }>()
-);
+export const openTaskDetails = createAction('[Task] Open Task Details', props<{ task: Task }>());
 
 // Action to open editTaskDialog
-export const openEditTaskDialog = createAction(
-  '[Task] Open Edit Task Dialog',
-  props<{ task: Task }>()
-);
+export const openEditTaskDialog = createAction('[Task] Open Edit Task Dialog', props<{ task: Task }>());
 
 
 // Action to remove the task 
-export const removeTask = createAction(
-  '[Task] Remove Task',
-  props<{ taskId: string }>()
-);
+export const removeTask = createAction('[Task] Remove Task', props<{ taskId: string }>());
 
-export const removeTaskSuccess = createAction(
-  '[Task] Remove Task Success',
-  props<{ taskId: string }>()
-);
+export const removeTaskSuccess = createAction('[Task] Remove Task Success', props<{ taskId: string }>());
 
-export const removeTaskFailure = createAction(
-  '[Task] Remove Task Failure',
-  props<{ error: any }>()
-);
+export const removeTaskFailure = createAction('[Task] Remove Task Failure', props<{ error: any }>());

@@ -58,6 +58,7 @@ export class TaskBoardComponent {
   taskPriorities = this.utils.getEnumNumberValues(TaskPriority);
   priorityLabels = TASK_PRIORITY_LABELS;
 
+  // form control for filtering
   titleFilterControl = new FormControl<string>('', {
     nonNullable: true,
   });
@@ -68,6 +69,7 @@ export class TaskBoardComponent {
     nonNullable: true,
   });
 
+
   titleFilter = this.utils.toSignalFromControl(this.titleFilterControl);
 
   assigneeFilter = this.utils.toSignalFromControl(this.assigneeFilterControl);
@@ -76,6 +78,7 @@ export class TaskBoardComponent {
     this.prioritiesFilterControl
   );
 
+  //Converts an observable stream of tasks from the storage service into a signal
   tasks = toSignal(
     this.storage.getItemObservable('tasks').pipe(
       takeUntilDestroyed(this.destroyRef),
@@ -84,6 +87,7 @@ export class TaskBoardComponent {
     { requireSync: true }
   );
 
+  //Computes and caches the list of tasks based on the current filter criteria
   filteredTasks = computed(this.computeFilteredTasks.bind(this));
 
   titleFilterActive = computed(() => !!this.titleFilter().length);
@@ -92,6 +96,8 @@ export class TaskBoardComponent {
 
   prioritiesFilterActive = computed(() => this.prioritiesFilter().length < 3);
 
+
+  //filters the list of tasks into categories based on their status, 
   backlogTasks = computed(() =>
     this.filteredTasks()?.filter((task) => task.status === TaskStatus.Backlog)
   );
@@ -130,18 +136,11 @@ export class TaskBoardComponent {
     if (prioritiesFilter) this.prioritiesFilterControl.reset([1, 2, 3]);
   }
 
-  // addTask() {
-  //   this.dialog.open(EditTaskDialogComponent, {
-  //     width: DIALOG_WIDTH,
-  //     data: { isEdit: false },
-  //     disableClose: true,
-  //   });
-  // }
-
   addTask() {
     this.store.dispatch(openAddTaskDialog());
   }
 
+  //filter the list of tasks based on the current filter criteria (title, assignee, and priorities)
   private computeFilteredTasks() {
     const tasks = this.tasks();
     const titleFilter = this.titleFilter().trim();

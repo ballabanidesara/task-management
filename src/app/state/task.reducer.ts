@@ -32,10 +32,6 @@ export const taskReducer = createReducer(
   on(addTaskSuccess, (state, { task }) => ({ ...state, tasks: [...state.tasks, task] })),
   on(addTaskFailure, (state, { error }) => ({ ...state, error })),
   on(openEditTaskDialog, (state, { task }) => ({ ...state, selectedTask: task })),
-  on(removeTaskSuccess, (state, { taskId }) => ({
-    ...state,
-    tasks: state.tasks.filter(task => task.id !== taskId)
-  })),
+  on(removeTaskSuccess, (state, { taskId }) => ({ ...state, tasks: state.tasks.filter(task => task.id !== taskId) })),
   on(removeTaskFailure, (state, { error }) => ({ ...state, error }))
-
 );
