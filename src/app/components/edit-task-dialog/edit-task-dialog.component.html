@@ -129,9 +129,12 @@
     </form>
   </mat-dialog-content>
   <mat-dialog-actions>
-    <button color="accent" mat-button [mat-dialog-close]="true">Close</button>
-    <button color="accent" mat-raised-button (click)="save()">
+    <button color="accent" mat-button [mat-dialog-close]="true" style="background-color: white;">
+      Close
+    </button>
+    <button color="accent" mat-raised-button (click)="save()" style="background-color: white;">
       {{ data.isEdit ? "Save" : "Create" }}
     </button>
+    
   </mat-dialog-actions>
 </div>

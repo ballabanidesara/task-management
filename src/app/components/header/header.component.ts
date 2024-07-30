@@ -10,7 +10,7 @@ import { MatMenuModule } from '@angular/material/menu';
   selector: 'tmb-header',
   standalone: true,
   imports: [CommonModule, RouterModule, TranslateModule, MatButtonModule,
-    MatMenuModule,],
+    MatMenuModule],
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush

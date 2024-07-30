@@ -5,16 +5,10 @@ import { Task } from '../models/task.model';
 export const loadMockTasks = createAction('[Task] Load Mock Tasks');
 
 // Action to handle successful loading of tasks
-export const loadMockTasksSuccess = createAction(
-  '[Task] Load Mock Tasks Success',
-  props<{ tasks: Task[] }>()
-);
+export const loadMockTasksSuccess = createAction('[Task] Load Mock Tasks Success', props<{ tasks: Task[] }>());
 
 // Action to handle failed loading of tasks
-export const loadMockTasksFailure = createAction(
-  '[Task] Load Mock Tasks Failure',
-  props<{ error: any }>()
-);
+export const loadMockTasksFailure = createAction('[Task] Load Mock Tasks Failure', props<{ error: any }>());
 
 // Action to clear all tasks
 export const clearTasks = createAction('[Task] Clear Tasks');

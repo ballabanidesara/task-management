@@ -133,33 +133,33 @@ export class TaskEffects {
   );
 
   removeTask$ = createEffect(() =>
-  this.actions$.pipe(
-    ofType(removeTask),
-    switchMap(({ taskId }) => {
-      try {
-        const tasks = this.storage.getItem('tasks') || [];
-        const updatedTasks = tasks.filter(task => task.id !== taskId);
-        this.storage.setItem('tasks', updatedTasks);
-        return of(removeTaskSuccess({ taskId }));
-      } catch (error) {
-        return of(removeTaskFailure({ error }));
-      }
-    })
-  )
-);
-
-removeTaskSuccess$ = createEffect(
-  () =>
     this.actions$.pipe(
-      ofType(removeTaskSuccess),
-      tap(() => {
-        this.snackBar.open('Task was removed!', 'Close', {
-          duration: 2000,
-        });
+      ofType(removeTask),
+      switchMap(({ taskId }) => {
+        try {
+          const tasks = this.storage.getItem('tasks') || [];
+          const updatedTasks = tasks.filter(task => task.id !== taskId);
+          this.storage.setItem('tasks', updatedTasks);
+          return of(removeTaskSuccess({ taskId }));
+        } catch (error) {
+          return of(removeTaskFailure({ error }));
+        }
       })
-    ),
-  { dispatch: false }
-);
+    )
+  );
+
+  removeTaskSuccess$ = createEffect(
+    () =>
+      this.actions$.pipe(
+        ofType(removeTaskSuccess),
+        tap(() => {
+          this.snackBar.open('Task was removed!', 'Close', {
+            duration: 2000,
+          });
+        })
+      ),
+    { dispatch: false }
+  );
 
 
   private mockedTasks(): Task[] {
