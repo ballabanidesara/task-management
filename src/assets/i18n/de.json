@@ -8,6 +8,6 @@
   "tasktracker": "AufgabenTracker",
   "login": "Anmelden",
   "signup": "Registrieren",
-  "updatetask": "AufgabenübersichtAktualisieren",
+  "updatetask": "AufgabeAktualisieren",
   "cleartask": "Aufgaben löschen"
 }

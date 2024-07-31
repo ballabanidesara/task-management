@@ -28,7 +28,7 @@ export class TaskStatusChartComponent implements OnInit, AfterViewInit, OnDestro
   private chart!: Chart<'doughnut', number[], string>;
   private subscriptions: Subscription = new Subscription();
 
-  constructor(private store: Store, private translate: TranslateService, private cdr: ChangeDetectorRef) {}
+  constructor(private store: Store, private translate: TranslateService, private cdr: ChangeDetectorRef) { }
 
   ngOnInit() {
     this.totalTasks$ = this.store.select(selectAllTasks).pipe(map(tasks => tasks.length));
@@ -76,7 +76,7 @@ export class TaskStatusChartComponent implements OnInit, AfterViewInit, OnDestro
 
       // Create chart with initial data and translated labels
       this.chart = new Chart('taskStatusChart', chartConfig);
-      
+
       // Ensure change detection to reflect updates
       this.cdr.detectChanges();
     });
